@@ -1,0 +1,11 @@
+!wget https://raw.githubusercontent.com/apache/incubator-mxnet/master/tools/im2rec.py          (This is to download im2rec.py file, that we will use for conversion)
+
+!chmod +x im2rec.py  (This will make this file executeable)
+
+!python im2rec.py --list --recursive --test-ratio 0.3 --train-ratio 0.7 images images/    (this will make images_train.lst and images_test.lst files, that will be used to convert to rec format)
+
+!python im2rec.py --num-thread 4 --pass-through images_train.lst images
+!python im2rec.py --num-thread 4 --pass-through images_test.lst images     (This will create respective.rec files and .idx files)
+
+Then upload to s3
+!aws s3 cp file_path s3://bucket_name/path
